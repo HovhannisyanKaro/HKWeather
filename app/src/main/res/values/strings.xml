@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">HKWeather</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="check_internet">Check internet connection!</string>
+
+    <string name="success" translatable="false">success</string>
+    <string name="ok" translatable="false">ok</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="weather_app">WeatherApp</string>
+
+</resources>

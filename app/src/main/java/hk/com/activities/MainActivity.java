@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
             logicForSavingWeatherInfo();
         }
 
+
         try {
             adapter = new WeatherAdapter(this, DBController.getWeatherInfoFromSQLite(MainActivity.this), this);
             rvWeathers.setAdapter(adapter);

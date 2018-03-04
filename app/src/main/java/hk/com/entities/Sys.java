@@ -4,18 +4,21 @@ package hk.com.entities;
  * Created by Hovhannisyan.Karo on 04.03.2018.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "type",
         "id",
         "message",
         "country",
         "sunrise",
-        "sunset"
+        "sunset",
+        "pod"
+
 })
 public class Sys {
 
@@ -31,6 +34,18 @@ public class Sys {
     private Integer sunrise;
     @JsonProperty("sunset")
     private Integer sunset;
+    @JsonProperty("pod")
+    private String pod;
+
+    @JsonProperty("pod")
+    public String getPod() {
+        return pod;
+    }
+
+    @JsonProperty("pod")
+    public void setPod(String pod) {
+        this.pod = pod;
+    }
 
     @JsonProperty("type")
     public Integer getType() {

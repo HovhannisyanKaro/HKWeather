@@ -13,7 +13,7 @@ import retrofit.RxJavaCallAdapterFactory;
 
 public class RetroClient {
 
-    private static final String ROOT_URL = "http://samples.openweathermap.org/data/2.5/";
+    private static final String ROOT_URL = "http://api.openweathermap.org/data/2.5/";
 
     private static retrofit.Retrofit getRetrofitInstance() {
         OkHttpClient client = new OkHttpClient();

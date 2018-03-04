@@ -10,6 +10,7 @@ import java.lang.ref.WeakReference;
 
 import hk.com.activities.SplashScreeenActivity;
 import hk.com.activities.MainActivity;
+import hk.com.fragments.FewDaysWeatherFragment;
 
 /**
  * Created by Hovhannisyan.Karo on 04.03.2018.
@@ -32,6 +33,9 @@ public class ViewController {
     private WeakReference<Activity> currentActivity;
     private WeakReference<SplashScreeenActivity> splashScreeenActivity;
     private WeakReference<MainActivity> mainActivity;
+
+    //Fragments
+    private WeakReference<FewDaysWeatherFragment> fewDaysFragment;
 
 
     public void setMainActivity(MainActivity mainActivity) {
@@ -58,6 +62,14 @@ public class ViewController {
 
     private <T> boolean isREferenceNotNull(WeakReference<T> weakReference) {
         return weakReference != null && weakReference.get() != null;
+    }
+
+    public void setFewDaysFragment(FewDaysWeatherFragment fewDaysFragment) {
+        this.fewDaysFragment = new WeakReference<>(fewDaysFragment);
+    }
+
+    public FewDaysWeatherFragment getFewDaysFragment() {
+        return isREferenceNotNull(fewDaysFragment) ? fewDaysFragment.get() : null;
     }
 
     public void replaceFragment(FragmentManager fm, @IdRes int containerId, Fragment fragment) {

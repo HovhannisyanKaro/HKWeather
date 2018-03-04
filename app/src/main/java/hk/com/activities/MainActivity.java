@@ -1,7 +1,5 @@
 package hk.com.activities;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -48,6 +45,8 @@ public class MainActivity extends AppCompatActivity
     RecyclerView rvWeathers;
 
     private WeatherAdapter adapter;
+    private MenuItem myActionMenuItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity
             logicForSavingWeatherInfo();
         }
 
-
-
         try {
             adapter = new WeatherAdapter(this, DBController.getWeatherInfoFromSQLite(MainActivity.this), this);
             rvWeathers.setAdapter(adapter);
@@ -81,7 +78,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
 
     private void logicForSavingWeatherInfo() {
         try {
@@ -117,11 +113,12 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
-        final MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
+        myActionMenuItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                NetworkController.getNetworkController().getYourWeather(query, MainActivity.this, MyNetworkCallHandlerController.getMyNetworkCallHandlerController());
                 if (!searchView.isIconified()) {
                     searchView.setIconified(true);
                 }
@@ -150,7 +147,6 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -159,6 +155,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemCLicked(View view, WeatherList weatherList) {
         ToastUtils.t(this, weatherList.getName());
-        ViewController.getViewController().replaceFragment(getSupportFragmentManager(), R.id.main_container, FewDaysWeatherFragment.newInstance());
+        goToCurrWeather(weatherList);
     }
+
+    public void goToCurrWeather(WeatherList weatherList) {
+        ViewController.getViewController().replaceFragment(getSupportFragmentManager(), R.id.main_container, FewDaysWeatherFragment.newInstance(weatherList));
+    }
+
+
+    public void hideSearchView(boolean isHide) {
+        if (isHide)
+            myActionMenuItem.setVisible(false);
+        else
+            myActionMenuItem.setVisible(true);
+    }
+
+
 }

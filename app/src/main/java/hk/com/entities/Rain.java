@@ -8,24 +8,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "all"
+        "3h"
 })
-public class Clouds {
+public class Rain {
 
-    @JsonProperty("all")
-    private Integer all;
+    @JsonProperty("3h")
+    private Double _3h;
 
-    @JsonProperty("all")
-    public Integer getAll() {
-        return all;
+    @JsonProperty("3h")
+    public Double get3h() {
+        return _3h;
     }
 
-    @JsonProperty("all")
-    public void setAll(Integer all) {
-        this.all = all;
+    @JsonProperty("3h")
+    public void set3h(Double _3h) {
+        this._3h = _3h;
     }
 
 }

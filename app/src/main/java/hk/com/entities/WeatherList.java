@@ -4,11 +4,11 @@ package hk.com.entities;
  * Created by Hovhannisyan.Karo on 04.03.2018.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "coord",
         "sys",
@@ -16,13 +16,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "main",
         "visibility",
         "wind",
+        "dt_txt",
         "clouds",
         "dt",
+        "rain",
         "id",
-        "name"
+        "name",
+        "snow"
+
 })
 public class WeatherList {
 
+    @JsonProperty("dt_txt")
+    private String dtTxt;
     @JsonProperty("coord")
     private Coord coord;
     @JsonProperty("sys")
@@ -43,6 +49,40 @@ public class WeatherList {
     private Integer id;
     @JsonProperty("name")
     private String name;
+    @JsonProperty("rain")
+    private Rain rain;
+    @JsonProperty("snow")
+    private Snow snow;
+
+    @JsonProperty("snow")
+    public Snow getSnow() {
+        return snow;
+    }
+
+    @JsonProperty("snow")
+    public void setSnow(Snow snow) {
+        this.snow = snow;
+    }
+
+    @JsonProperty("rain")
+    public Rain getRain() {
+        return rain;
+    }
+
+    @JsonProperty("rain")
+    public void setRain(Rain rain) {
+        this.rain = rain;
+    }
+
+    @JsonProperty("dt_txt")
+    public String getDtTxt() {
+        return dtTxt;
+    }
+
+    @JsonProperty("dt_txt")
+    public void setDtTxt(String dtTxt) {
+        this.dtTxt = dtTxt;
+    }
 
     @JsonProperty("coord")
     public Coord getCoord() {
@@ -68,6 +108,7 @@ public class WeatherList {
     public java.util.List<Weather_> getWeather() {
         return weather;
     }
+
 
     @JsonProperty("weather")
     public void setWeather(java.util.List<Weather_> weather) {
@@ -147,7 +188,8 @@ public class WeatherList {
     @Override
     public String toString() {
         return "WeatherList{" +
-                "coord=" + coord +
+                "dtTxt='" + dtTxt + '\'' +
+                ", coord=" + coord +
                 ", sys=" + sys +
                 ", weather=" + weather +
                 ", main=" + main +
@@ -157,6 +199,8 @@ public class WeatherList {
                 ", dt=" + dt +
                 ", id=" + id +
                 ", name='" + name + '\'' +
+                ", rain=" + rain +
+                ", snow=" + snow +
                 '}';
     }
 }

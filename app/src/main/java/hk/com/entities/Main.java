@@ -4,20 +4,26 @@ package hk.com.entities;
  * Created by Hovhannisyan.Karo on 04.03.2018.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "temp",
         "pressure",
         "humidity",
+        "sea_level",
+        "grnd_level",
         "temp_min",
-        "temp_max"
+        "temp_max",
+        "temp_kf"
 })
 public class Main {
 
+    @JsonProperty("grnd_level")
+    private Double grndLevel;
     @JsonProperty("temp")
     private Integer temp;
     @JsonProperty("pressure")
@@ -28,7 +34,40 @@ public class Main {
     private Integer tempMin;
     @JsonProperty("temp_max")
     private Integer tempMax;
+    @JsonProperty("sea_level")
+    private Double seaLevel;
+    @JsonProperty("temp_kf")
+    private Integer tempKf;
 
+    @JsonProperty("temp_kf")
+    public Integer getTempKf() {
+        return tempKf;
+    }
+
+    @JsonProperty("temp_kf")
+    public void setTempKf(Integer tempKf) {
+        this.tempKf = tempKf;
+    }
+
+    @JsonProperty("grnd_level")
+    public Double getGrndLevel() {
+        return grndLevel;
+    }
+
+    @JsonProperty("grnd_level")
+    public void setGrndLevel(Double grndLevel) {
+        this.grndLevel = grndLevel;
+    }
+
+    @JsonProperty("sea_level")
+    public Double getSeaLevel() {
+        return seaLevel;
+    }
+
+    @JsonProperty("sea_level")
+    public void setSeaLevel(Double seaLevel) {
+        this.seaLevel = seaLevel;
+    }
     @JsonProperty("temp")
     public Integer getTemp() {
         return temp;

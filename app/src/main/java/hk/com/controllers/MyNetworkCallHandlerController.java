@@ -31,6 +31,13 @@ public class MyNetworkCallHandlerController implements OnNetworkCallListener {
             case RIdValues.GET_WEATHERS:
                 ViewController.getViewController().getMainActivity().setAdapter(true);
                 break;
+            case RIdValues.GET_YOU_WEATHER:
+                ViewController.getViewController().getMainActivity().goToCurrWeather(DataController.getDataController().getYourWeather());
+                break;
+            case RIdValues.GET_FEW_DAYS_WEATHER:
+                ViewController.getViewController().getFewDaysFragment().setAdapter();
+                break;
+
 
         }
     }

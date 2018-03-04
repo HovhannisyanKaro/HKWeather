@@ -3,6 +3,7 @@ package hk.com.controllers;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -61,8 +62,21 @@ public class DBController {
                 weatherLists.add(weatherList);
             } while (cursor.moveToNext());
         }
+        sqLiteDatabase.close();
 
         return weatherLists;
+    }
+
+    public static boolean isExists(Activity activity, String countryName) {
+        WeatherDBHelper weatherDBHelper = new WeatherDBHelper(activity);
+        SQLiteDatabase sqLiteDatabase = weatherDBHelper.getReadableDatabase();
+        Cursor cursor = weatherDBHelper.getWeather(countryName, sqLiteDatabase);
+        boolean isExists = false;
+        if (cursor.moveToFirst()) {
+            isExists = true;
+        }
+        sqLiteDatabase.close();
+        return isExists;
     }
 
 

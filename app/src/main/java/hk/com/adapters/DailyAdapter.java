@@ -5,36 +5,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import hk.com.entities.Weather;
 import hk.com.entities.WeatherList;
 import hk.com.enums.Constants;
 import hk.com.hkweather.R;
 import hk.com.interfacies.OnRVWeatherClickListener;
 
 /**
- * Created by Hovhannisyan.Karo on 04.03.2018.
+ * Created by Hovhannisyan.Karo on 05.03.2018.
  */
 
-public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.MyViewHolder> {
-
+public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.MyViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
     private List<WeatherList> weatherList;
     private OnRVWeatherClickListener onRVWeatherClickListener;
 
-    public WeatherAdapter(Context context, List<WeatherList> weatherList, OnRVWeatherClickListener onRVWeatherClickListener) {
+    public DailyAdapter(Context context, List<WeatherList> weatherList, OnRVWeatherClickListener onRVWeatherClickListener) {
         this.context = context;
         this.weatherList = weatherList;
         this.onRVWeatherClickListener = onRVWeatherClickListener;
@@ -43,7 +40,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(inflater.inflate(R.layout.item_weather, parent, false));
+        return new DailyAdapter.MyViewHolder(inflater.inflate(R.layout.item_weather_daily, parent, false));
     }
 
     @Override
@@ -57,37 +54,22 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.MyViewHo
         return weatherList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.tv_city_name)
-        TextView tvCityName;
-        @BindView(R.id.tv_hum)
-        TextView tvHumidity;
-        @BindView(R.id.tv_temp)
-        TextView tvTemp;
-        @BindView(R.id.ll_root)
-        LinearLayout llRoot;
-        @BindView(R.id.iv_icon)
-        ImageView ivIcon;
-        Unbinder unbinder;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_date)
+        TextView tvDate;
         WeatherList weatherList;
+        Unbinder unbinder;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this, itemView);
-            llRoot.setOnClickListener(this);
+
         }
 
         public void bind(WeatherList currWeather) {
             weatherList = currWeather;
-            tvCityName.setText(currWeather.getName());
-            tvTemp.setText(String.valueOf(currWeather.getMain().getTemp()));
-            tvHumidity.setText(weatherList.getMain().getHumidity() + " %");
-            Glide.with(context).load(Constants.IMAGE_BASE_URL.toString() + weatherList.getWeather().get(0).getIcon() + ".png").into(ivIcon);
-        }
-
-        @Override
-        public void onClick(View view) {
-            onRVWeatherClickListener.onItemCLicked(view, weatherList);
+            tvDate.setText(new Date(currWeather.getDt()).toString() + " temp = " + weatherList.getMain().getTemp());
         }
     }
 }

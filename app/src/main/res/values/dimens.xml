@@ -8,4 +8,5 @@
     <dimen name="item_weather_height">130dp</dimen>
     <dimen name="countryTitleSize">22sp</dimen>
     <dimen name="tempSize">36sp</dimen>
+    <dimen name="fab_size">66dp</dimen>
 </resources>

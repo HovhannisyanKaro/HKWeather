@@ -8,7 +8,8 @@ public enum Constants {
     TABLE_NAME("table_name"),
     COUNTRY("country"),
     COUNTRY_NAME("country_name"),
-    COUNTRY_LISTS("country_lists");
+    COUNTRY_LISTS("country_lists"),
+    IMAGE_BASE_URL("http://openweathermap.org/img/w/");
 
 
     private String key;

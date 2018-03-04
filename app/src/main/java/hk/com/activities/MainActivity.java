@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
     private void logicForSavingWeatherInfo() {
@@ -106,10 +107,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
     private void logicForSavingWeatherInfo() {
         try {
             List<WeatherList> weatherList = DataController.getDataController().getFirstWeatherData().getList();
